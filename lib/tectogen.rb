@@ -1,2 +1,8 @@
+require_relative "./tectogen/version"
+require_relative "./tectogen/info_display"
+require_relative "./tectogen/runner"
 require_relative "./tectogen/parser"
 require_relative "./tectogen/ast"
+require_relative "./tectogen/compiler"
+require_relative "./tectogen/pixmap"
+require_relative "./tectogen/ppm_generator"

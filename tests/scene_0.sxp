@@ -60,7 +60,9 @@
   (vegetation "tree1"
     (color "green1")
     (polycircle
-      (circle 375 875 20)
+      (circle (center 375 875) (radius 20) )
+      (circle (center 400 900) (radius 40) )
+      (circle (center 410 920) (radius 50) )
     )
   )
 )

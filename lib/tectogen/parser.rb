@@ -2,7 +2,7 @@ require "sxp"
 module Tectogen
   class Parser
     def parse filename
-      pp sxp = SXP.read(File.read(filename))
+      sxp = SXP.read(File.read(filename))
       name=sxp[1]
       2.times{sxp.shift} #consume tokens
       scene=Scene.new(name)
@@ -21,7 +21,6 @@ module Tectogen
           raise "PARSE ERROR [scene] : unknown sxp type '#{type}'"
         end
       end
-      pp scene
       scene
     end
 
@@ -116,10 +115,23 @@ module Tectogen
     def parse_circle sxp
       circ=Circle.new
       sxp.shift
-      circ.x=sxp.shift
-      circ.y=sxp.shift
-      circ.radius=sxp.shift
+        while sxp.any?
+        item=sxp.shift
+        case type=sxp_type(item)
+        when :point,:center
+          circ.center=parse_point(item)
+        when :radius
+          circ.radius=parse_radius(item)
+        else
+          raise "PARSE ERROR [circle] : unknown sxp type '#{type}'"
+        end
+      end
       circ
+    end
+
+    def parse_radius sxp
+      sxp.shift
+      sxp.shift
     end
   end
 end
