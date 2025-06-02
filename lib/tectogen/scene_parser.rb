@@ -1,11 +1,11 @@
 require "sxp"
 module Tectogen
-  class Parser
+  class SceneParser
     def parse filename
       sxp = SXP.read(File.read(filename))
-      name=sxp[1]
-      2.times{sxp.shift} #consume tokens
-      scene=Scene.new(name)
+      scene=Scene.new
+      check(sxp.shift,:scene)
+      scene.name=sxp.shift
       while sxp.any?
         item=sxp.shift
         case type=sxp_type(item)
@@ -16,12 +16,18 @@ module Tectogen
         when :vegetation
           scene << parse_vegetation(item)
         when :road
-        when :bank
+          scene << parse_road(item)
+        when :water
+          scene << parse_water(item)
         else
           raise "PARSE ERROR [scene] : unknown sxp type '#{type}'"
         end
       end
       scene
+    end
+
+    def check sym,expected
+      raise "ERROR : parsing [#{expected}] expecting '#{expected}'. Got '#{sym}'" unless sym==expected
     end
 
     def sxp_type sxp
@@ -115,7 +121,7 @@ module Tectogen
     def parse_circle sxp
       circ=Circle.new
       sxp.shift
-        while sxp.any?
+      while sxp.any?
         item=sxp.shift
         case type=sxp_type(item)
         when :point,:center
@@ -127,6 +133,50 @@ module Tectogen
         end
       end
       circ
+    end
+
+
+    def parse_road sxp
+      road=Road.new
+      sxp.shift #road
+      road.name=sxp.shift
+      while sxp.any?
+        item=sxp.shift
+        case type=sxp_type(item)
+        when :color
+          road.color=parse_color(item)
+        when :width
+          road.width=parse_width(item)
+        when :polyline
+          road.polyline=parse_polyline(item)
+        else
+          raise "PARSE ERROR [road] : unknown sxp type '#{type}'"
+        end
+      end
+      road
+    end
+
+    def parse_water sxp
+      water=Water.new
+      sxp.shift
+      water.name=sxp.shift
+      while sxp.any?
+        item=sxp.shift
+        case type=sxp_type(item)
+        when :color
+          water.color=parse_color(item)
+        when :polycircle
+          water.polycircle=parse_polycircle(item)
+        else
+          raise "PARSE ERROR [water] : unknown sxp type '#{type}'"
+        end
+      end
+      water
+    end
+
+    def parse_width sxp
+      sxp.shift
+      sxp.shift
     end
 
     def parse_radius sxp

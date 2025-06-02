@@ -57,6 +57,19 @@ module Tectogen
     end
   end
 
+  class Road < AstNode
+    attr_accessor :name,:width,:color,:polyline
+    def initialize name=nil,color=nil,width=nil,polyline=[]
+      @name,@color,@width,@polyline=name,color,width,polyline
+    end
+  end
+
+  class Water < AstNode
+    attr_accessor :name,:color,:polycircle
+    def initialize name=nil,color=nil,polycircle=[]
+      @name,@color,@polycircle=name,color,polycircle
+    end
+  end
   #============ Helpers =================
   # - dim, color, polyline
   # - circle, polycircle
@@ -73,8 +86,12 @@ module Tectogen
     :green  => [0,128,0],
     :blue   => [0,0,255],
     :white  => [255,255,255],
+    :white1 => [240,240,240],
     :black  => [0,0,0],
     :green1 => [0,255,50],
+    :green2 => [50,205,50],
+    :orange => [255,165,0],
+    :gray   => [169,169,169],
   }
 
 

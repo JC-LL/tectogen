@@ -12,7 +12,7 @@ module Tectogen
 
     def parse scene_filename
       info 0,"parsing '#{scene_filename}'"
-      Parser.new.parse(scene_filename)
+      SceneParser.new.parse(scene_filename)
     end
 
     def gen_ppm scene

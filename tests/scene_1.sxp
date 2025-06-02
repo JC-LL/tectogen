@@ -1,0 +1,14 @@
+(scene "scene_1"
+
+  (dim 1000 1000)
+
+  (house "maison1"
+    (color "blue")
+    (polyline
+      (point 250 750)
+      (point 375 850)
+      (point 275 700)
+      (point 250 700)
+    )
+  )
+)

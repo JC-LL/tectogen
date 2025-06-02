@@ -65,47 +65,4 @@
       (circle (center 410 920) (radius 50) )
     )
   )
-
-  (vegetation "tree2"
-    (color "green1")
-    (polycircle
-      (circle (center 675 375) (radius 20) )
-      (circle (center 600 300) (radius 40) )
-      (circle (center 610 320) (radius 50) )
-    )
-  )
-
-  (road "road1"
-    (color "black")
-    (width 10)
-    (polyline
-      (point 10 0)
-      (point 100 250)
-      (point 475 350)
-      (point 750 500)
-      (point 1000 450)
-    )
-  )
-
-  (road "road2"
-    (color "black")
-    (width 10)
-    (polyline
-      (point 475 350)
-      (point 300 450)
-      (point 350 550)
-      (point 50 700)
-      (point 0 1000)
-
-    )
-  )
-
-  (water "lake1"
-    (color "blue")
-    (polycircle
-      (circle (center 875 915) (radius 30) )
-      (circle (center 800 900) (radius 40) )
-      (circle (center 810 920) (radius 50) )
-    )
-  )
 )
